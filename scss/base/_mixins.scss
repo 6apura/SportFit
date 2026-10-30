@@ -28,7 +28,7 @@
   &:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba($color-accent, 0.35); }
 }
 
-// Спільний двоколонковий макет на Flex, не Grid.
+
 @mixin split-layout($gap: 60px, $mobile-gap: 30px) {
   @include flex(space-between, center, $gap);
   > * { flex: 1 1 0; min-width: 0; }
