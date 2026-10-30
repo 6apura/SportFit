@@ -1,7 +1,7 @@
 @use "sass:list";
 @use "variables" as *;
 
-// Медіа-запити
+
 @mixin xl { @media (min-width: $bp-xl) { @content; } }
 @mixin laptop { @media (max-width: $bp-laptop) { @content; } }
 @mixin tablet { @media (max-width: $bp-tablet) { @content; } }
