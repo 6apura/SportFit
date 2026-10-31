@@ -1,13 +1,35 @@
-@use "sass:list";
-@use "variables" as *;
+@use 'sass:list';
+@use 'variables' as *;
 
+@mixin xl {
+  @media (min-width: $bp-xl) {
+    @content;
+  }
+}
+@mixin laptop {
+  @media (max-width: $bp-laptop) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: $bp-tablet) {
+    @content;
+  }
+}
+@mixin mobile {
+  @media (max-width: ($bp-mobile + 160px)) {
+    @content;
+  }
+}
 
-@mixin xl { @media (min-width: $bp-xl) { @content; } }
-@mixin laptop { @media (max-width: $bp-laptop) { @content; } }
-@mixin tablet { @media (max-width: $bp-tablet) { @content; } }
-@mixin mobile { @media (max-width: ($bp-mobile + 160px)) { @content; } }
-
-@mixin flex($justify: center, $align: center, $gap: 0, $direction: row, $wrap: nowrap, $display: flex) {
+@mixin flex(
+  $justify: center,
+  $align: center,
+  $gap: 0,
+  $direction: row,
+  $wrap: nowrap,
+  $display: flex
+) {
   display: $display;
   justify-content: $justify;
   align-items: $align;
@@ -16,26 +38,45 @@
   flex-wrap: $wrap;
 }
 @mixin grid($cols: 2, $gap: 40px) {
-  display: grid; grid-template-columns: repeat($cols, minmax(0, 1fr)); gap: $gap;
+  display: grid;
+  grid-template-columns: repeat($cols, minmax(0, 1fr));
+  gap: $gap;
 }
 @mixin title($size: 36px) {
-  font-size: $size; font-weight: 700; text-transform: uppercase; line-height: 1.15;
-  @include tablet { font-size: $size * 0.75; }
-  @include mobile { font-size: $size * 0.6; }
+  font-size: $size;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.15;
+  @include tablet {
+    font-size: $size * 0.75;
+  }
+  @include mobile {
+    font-size: $size * 0.6;
+  }
 }
 @mixin hover-lift {
-  transition: transform $transition, box-shadow $transition;
-  &:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba($color-accent, 0.35); }
+  transition:
+    transform $transition,
+    box-shadow $transition;
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba($color-accent, 0.35);
+  }
 }
-
 
 @mixin split-layout($gap: 60px, $mobile-gap: 30px) {
   @include flex(space-between, center, $gap);
-  > * { flex: 1 1 0; min-width: 0; }
+  > * {
+    flex: 1 1 0;
+    min-width: 0;
+  }
   @include tablet {
     flex-direction: column;
     gap: $mobile-gap;
-    > * { flex: none; width: 100%; }
+    > * {
+      flex: none;
+      width: 100%;
+    }
   }
 }
 
@@ -45,49 +86,79 @@
 
 @mixin size($width, $height: $width) {
   width: $width;
-  @if $height != null { height: $height; }
+  @if $height != null {
+    height: $height;
+  }
 }
 
 @mixin cover-image($height, $tablet-height: null, $radius: null) {
   @include size(100%, $height);
   object-fit: cover;
-  @if $radius != null { border-radius: $radius; }
-  @if $tablet-height != null { @include tablet { height: $tablet-height; } }
+  @if $radius != null {
+    border-radius: $radius;
+  }
+  @if $tablet-height != null {
+    @include tablet {
+      height: $tablet-height;
+    }
+  }
 }
 
 @mixin text($size: 14px, $weight: null, $color: null, $uppercase: false) {
   font-size: $size;
-  @if $weight != null { font-weight: $weight; }
-  @if $color != null { color: $color; }
-  @if $uppercase { text-transform: uppercase; }
+  @if $weight != null {
+    font-weight: $weight;
+  }
+  @if $color != null {
+    color: $color;
+  }
+  @if $uppercase {
+    text-transform: uppercase;
+  }
 }
 
 @mixin transition($properties...) {
   $value: ();
-  @each $property in $properties { $value: list.append($value, $property $transition, comma); }
+  @each $property in $properties {
+    $value: list.append($value, $property $transition, comma);
+  }
   transition: $value;
 }
 
 @mixin positioned($position, $top: null, $right: null, $bottom: null, $left: null, $z: null) {
   position: $position;
-  @if $top != null { top: $top; }
-  @if $right != null { right: $right; }
-  @if $bottom != null { bottom: $bottom; }
-  @if $left != null { left: $left; }
-  @if $z != null { z-index: $z; }
+  @if $top != null {
+    top: $top;
+  }
+  @if $right != null {
+    right: $right;
+  }
+  @if $bottom != null {
+    bottom: $bottom;
+  }
+  @if $left != null {
+    left: $left;
+  }
+  @if $z != null {
+    z-index: $z;
+  }
 }
 
 @mixin section-spacing {
   scroll-margin-top: var(--header-height);
   padding: 70px 0;
-  @include tablet { padding: 45px 0; }
+  @include tablet {
+    padding: 45px 0;
+  }
 }
 
 @mixin container {
   max-width: $container;
   margin: 0 auto;
   padding: 0 20px;
-  @include xl { max-width: $container-xl; }
+  @include xl {
+    max-width: $container-xl;
+  }
 }
 
 @mixin button {
@@ -101,7 +172,10 @@
   text-transform: uppercase;
   cursor: pointer;
   @include transition(background, transform);
-  &:hover { background: var(--color-accent-hover); transform: scale(1.05); }
+  &:hover {
+    background: var(--color-accent-hover);
+    transform: scale(1.05);
+  }
 }
 
 @mixin input {
@@ -113,5 +187,8 @@
   background: var(--color-text);
   color: var(--color-bg);
   @include transition(border-color);
-  &:focus { outline: none; border-color: var(--color-accent); }
+  &:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
 }

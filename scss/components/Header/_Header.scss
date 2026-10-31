@@ -1,16 +1,48 @@
-@use "../../base/variables" as *;
-@use "../../base/mixins" as *;
+@use '../../base/variables' as *;
+@use '../../base/mixins' as *;
 
 .header {
   @include positioned(sticky, $top: 0, $z: 50);
-  height: var(--header-height); background: rgba($color-bg, 0.92); backdrop-filter: blur(8px);
-  &__inner { @include flex(space-between, center, 20px); height: 100%; }
-  &__logo { @include flex(flex-start, center, 8px); @include text(20px, 800);
-    img { width: 34px; } span { color: var(--color-accent); } }
-  &__nav { @include flex(flex-end, center, 24px); @include text(13px, $uppercase: true);
-    a { @include positioned(relative); padding: 4px 0;
-      &::after { content: ""; @include positioned(absolute, $bottom: 0, $left: 0); @include size(0, 2px); background: var(--color-accent); @include transition(width); }
-      &:hover::after { width: 100%; } }
-    @include tablet { gap: 14px; font-size: 11px; }
-    @include mobile { display: none; } }
+  height: var(--header-height);
+  background: rgba($color-bg, 0.92);
+  backdrop-filter: blur(8px);
+  &__inner {
+    @include flex(space-between, center, 20px);
+    height: 100%;
+  }
+  &__logo {
+    @include flex(flex-start, center, 8px);
+    @include text(20px, 800);
+    img {
+      width: 34px;
+    }
+    span {
+      color: var(--color-accent);
+    }
+  }
+  &__nav {
+    @include flex(flex-end, center, 24px);
+    @include text(13px, $uppercase: true);
+    a {
+      @include positioned(relative);
+      padding: 4px 0;
+      &::after {
+        content: '';
+        @include positioned(absolute, $bottom: 0, $left: 0);
+        @include size(0, 2px);
+        background: var(--color-accent);
+        @include transition(width);
+      }
+      &:hover::after {
+        width: 100%;
+      }
+    }
+    @include tablet {
+      gap: 14px;
+      font-size: 11px;
+    }
+    @include mobile {
+      display: none;
+    }
+  }
 }

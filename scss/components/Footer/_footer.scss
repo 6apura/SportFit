@@ -1,36 +1,96 @@
-@use "../../base/variables" as *;
-@use "../../base/mixins" as *;
+@use '../../base/variables' as *;
+@use '../../base/mixins' as *;
 
 .footer {
-  padding: 40px 0; background: var(--color-bg-light);
-  &__inner { @include flex(space-between, center, 30px, $wrap: wrap);
-    @include mobile { flex-direction: column; align-items: flex-start; } }
-  &__label { @include flex(flex-start, center, 6px); color: var(--color-muted); font-size: 12px;
-    img { width: 16px; } }
-  &__value { font-size: 15px; margin-bottom: 10px; }
-  &__social { @include flex(flex-start, center, 14px); margin-top: 8px;
-    a { width: 30px; @include transition(transform); &:hover { transform: rotate(-10deg) scale(1.15); } } }
+  padding: 40px 0;
+  background: var(--color-bg-light);
+  &__inner {
+    @include flex(space-between, center, 30px, $wrap: wrap);
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  &__label {
+    @include flex(flex-start, center, 6px);
+    color: var(--color-muted);
+    font-size: 12px;
+    img {
+      width: 16px;
+    }
+  }
+  &__value {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  &__social {
+    @include flex(flex-start, center, 14px);
+    margin-top: 8px;
+    a {
+      width: 30px;
+      @include transition(transform);
+      &:hover {
+        transform: rotate(-10deg) scale(1.15);
+      }
+    }
+  }
 }
-
 
 .to-top {
   @include positioned(fixed, $right: 24px, $bottom: 24px, $z: 40);
-  @include flex; @include size(48px); border-radius: 50%; background: var(--color-accent);
+  @include flex;
+  @include size(48px);
+  border-radius: 50%;
+  background: var(--color-accent);
   @include transition(background, transform);
-  img { width: 22px; }
-  &:hover { background: var(--color-accent-hover); transform: translateY(-4px); }
+  img {
+    width: 22px;
+  }
+  &:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-4px);
+  }
 }
 
-
 .popup {
-  @include positioned(fixed, $z: 100); inset: 0; @include flex;
-  background: rgba(0, 0, 0, 0.75); opacity: 0; visibility: hidden; @include transition(opacity, visibility);
-  &:target { opacity: 1; visibility: visible; }
-  &:target &__body { animation: popupIn 0.4s ease both; }
-  &__body { @include positioned(relative); width: 90%; max-width: 440px; padding: 40px 30px; border-radius: 12px; background: var(--color-bg-light); }
-  &__close { @include positioned(absolute, 12px, 18px); font-size: 28px; line-height: 1; color: var(--color-muted);
+  @include positioned(fixed, $z: 100);
+  inset: 0;
+  @include flex;
+  background: rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  visibility: hidden;
+  @include transition(opacity, visibility);
+  &:target {
+    opacity: 1;
+    visibility: visible;
+  }
+  &:target &__body {
+    animation: popupIn 0.4s ease both;
+  }
+  &__body {
+    @include positioned(relative);
+    width: 90%;
+    max-width: 440px;
+    padding: 40px 30px;
+    border-radius: 12px;
+    background: var(--color-bg-light);
+  }
+  &__close {
+    @include positioned(absolute, 12px, 18px);
+    font-size: 28px;
+    line-height: 1;
+    color: var(--color-muted);
     @include transition(color, transform);
-    &:hover { color: var(--color-accent); transform: rotate(90deg); } }
-  &__title { @include text(22px, 700, $uppercase: true); margin-bottom: 20px; }
-  &__form { @include stack; }
+    &:hover {
+      color: var(--color-accent);
+      transform: rotate(90deg);
+    }
+  }
+  &__title {
+    @include text(22px, 700, $uppercase: true);
+    margin-bottom: 20px;
+  }
+  &__form {
+    @include stack;
+  }
 }
